@@ -157,8 +157,6 @@ class Runner:
             amount = random.uniform(min_amount, min(max_amount, balance))
         else:
             amount = balance * REFUEL_AMOUNT_PERCENTAGE / 100.0
-            if min_amount > amount:
-                raise RunnerException(f'Insufficient balance for min amount refuel to {to_chain}')
 
         amount = round(amount, random.randint(valuable_decimals, valuable_decimals + 2))
         amount_int = decimal_to_int(amount, NATIVE_TOKEN_DECIMAL)
