@@ -148,15 +148,17 @@ class Runner:
         balance = int_to_decimal(balance_int, NATIVE_TOKEN_DECIMAL)
 
         min_amount, max_amount = get_chain_amount_range(to_chain)
-        if min_amount > balance:
-            raise RunnerException(f'Insufficient balance for min amount refuel to {to_chain}')
 
         valuable_decimals = NATIVE_TOKEN_VALUABLE_DECIMALS[REFUEL_FROM]
 
         if REFUEL_AMOUNT_PERCENTAGE == 0:
+            if min_amount > balance:
+                raise RunnerException(f'Insufficient balance for min amount refuel to {to_chain}')
             amount = random.uniform(min_amount, min(max_amount, balance))
         else:
             amount = balance * REFUEL_AMOUNT_PERCENTAGE / 100.0
+            if min_amount > amount:
+                raise RunnerException(f'Insufficient balance for min amount refuel to {to_chain}')
 
         amount = round(amount, random.randint(valuable_decimals, valuable_decimals + 2))
         amount_int = decimal_to_int(amount, NATIVE_TOKEN_DECIMAL)
@@ -369,3 +371,13 @@ def main():
     queue.put('Finished')
     pool.close()
     pool.join()
+
+
+if __name__ == '__main__':
+    cprint('###########################################################', 'cyan')
+    cprint('#######################', 'cyan', end='')
+    cprint(' By @timfame ', 'magenta', end='')
+    cprint('#######################', 'cyan')
+    cprint('###########################################################\n', 'cyan')
+
+    main()
