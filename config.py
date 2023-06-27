@@ -28,7 +28,7 @@ MAX_TRIES = 3
 
 # Кол-во потоков, в которых будет запускаться скрипт.
 # В большинстве случаев можно оставить 1 поток и просто уменьшить время ожидания между акками
-PROCESSES_NUM = 2
+PROCESSES_NUM = 1
 
 # Possible values: Ethereum, Optimism, BSC, Gnosis, Polygon, Fantom, Arbitrum, Avalanche, zkSync, zkEVM
 REFUEL_FROM = 'Avalanche'
@@ -39,16 +39,17 @@ REFUEL_TO = ['Optimism', 'zkSync']
 REFUEL_AMOUNT_PERCENTAGE = 95
 
 # Amount of network native token
-DEFAULT_MIN_REFUEL_AMOUNT = 2
-DEFAULT_MAX_REFUEL_AMOUNT = 3
+DEFAULT_MIN_REFUEL_AMOUNT = 0.35
+DEFAULT_MAX_REFUEL_AMOUNT = 0.35
 
 # Максимально возможное кол-во дополнительных рандомных refuel транзакции (итоговая сумма остается та же)
 MAX_RANDOM_TX_COUNT = 2
 RANDOM_TX_MIN_REFUEL_AMOUNT = 1
 
-# "<network>: (min_amount, max_amount)" (in native token)
+# <network>: (min_amount, max_amount)
+# (in native token)
 # Если для какой-то сети не указано, то для нее берутся значения DEFAULT_MIN_REFUEL_AMOUNT и DEFAULT_MAX_REFUEL_AMOUNT
 REFUEL_AMOUNT_BY_CHAIN = {
-    'Optimism': (6.0, 8.0),
-    'zkSync': (4.7, 5.0),
+    'Optimism': (0.3, 0.4),
+    'zkSync': (0.4, 0.4),
 }
